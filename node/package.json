@@ -1,0 +1,22 @@
+{
+  "name": "quikreport",
+  "version": "1.0.0",
+  "description": "Hassle-free real-time reporting of suspicious activity in schools.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbstractLion/QuikReport.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbstractLion/QuikReport/issues"
+  },
+  "homepage": "https://github.com/AbstractLion/QuikReport#readme",
+  "dependencies": {
+    "pusher": "^3.0.0"
+  }
+}
