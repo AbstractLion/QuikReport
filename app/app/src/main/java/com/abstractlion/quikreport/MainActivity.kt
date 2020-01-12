@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
-import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +35,7 @@ import com.mongodb.client.model.Filters.*
 import com.mongodb.client.result.DeleteResult
 import com.mongodb.client.model.Updates.*
 import com.mongodb.client.result.UpdateResult
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 
 
@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
     private var markerX: Int = 0
     private var markerY: Int = 0
     private var marker: ImageView? = null
+    private val connectionString = MongoClientURI("mongodb://quikreport:quikreport123@ds121535.mlab.com:21535/heroku_z9cfrd75")
+    private val mongoClient : MongoClient = MongoClient(connectionString)
+    private val database = mongoClient.getDatabase("heroku_z9cfrd75")
+    private var collection : MongoCollection<Document> = database.getCollection("reports");
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,12 +90,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onEvent(event: PusherEvent?) {
-
             }
         })
         channel.bind("my-event") { event -> println("Received event with data: $event") }
 
         reportButton.setOnClickListener {
+            val doc : Document = Document("x", markerX)
+                .append("y", markerY)
+                .append("floor", 1)
+                .append("student_no", 869812);
+            collection.insertOne(doc);
             val iii = Intent(this, ReportActivity::class.java)
             this.startActivity(iii)
         }
