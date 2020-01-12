@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 
-class SchoolMap @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+public class SchoolMapFloor1 @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
 View(context, attrs, defStyleAttr) {
 
     private val mCustomImage : Drawable? = context.getResources().getDrawable(R.drawable.floor_1)
