@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.abstractlion.quikreport.R
 
 class DashboardFragment : Fragment() {
-
     private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreateView(
