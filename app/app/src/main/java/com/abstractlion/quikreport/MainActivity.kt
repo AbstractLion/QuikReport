@@ -1,5 +1,10 @@
 package com.abstractlion.quikreport
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -48,5 +53,14 @@ class MainActivity : AppCompatActivity() {
         val channel: Channel = pusher.subscribe("my-channel")
 
         channel.bind("my-event") { event -> println("Received event with data: $event") }
+        /*
+        val bitmap: Bitmap = Bitmap.createBitmap(700, 1000, Bitmap.Config.ARGB_8888)
+        val canvas : Canvas = Canvas(bitmap)
+        var dot : ShapeDrawable = ShapeDrawable(OvalShape())
+        dot.setBounds(123,34,4335,334)
+        dot.draw(canvas)
+        imageV.background = BitmapDrawable(getResources(), bitmap)
+
+         */
     }
 }
