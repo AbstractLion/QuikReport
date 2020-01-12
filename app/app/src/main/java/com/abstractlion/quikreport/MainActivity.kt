@@ -21,6 +21,7 @@ import com.pusher.client.channel.Channel
 import com.pusher.client.connection.ConnectionEventListener
 import com.pusher.client.connection.ConnectionState
 import com.pusher.client.connection.ConnectionStateChange
+import com.pusher.client.channel.SubscriptionEventListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,6 +59,21 @@ class MainActivity : AppCompatActivity() {
 
 
         val channel: Channel = pusher.subscribe("my-channel")
+
+        var eventListener : SubscriptionEventListener = new SubscriptionEventListener() {
+            override public void onEvent(String channel, final String event, final String data) {
+                runOnUiThread(new Runnable() {
+                    override public void run() {
+                        println("Received event with data: " + data);
+                        Gson gson = new Gson();
+                        Event evt = gson.fromJson(data, Event.class);
+                        evt.setName(event + ":");
+                        adapter.addEvent(evt);
+                        ((LinearLayoutManager)lManager).scrollToPositionWithOffset(0, 0);
+                    }
+                });
+            }
+        }
 
         channel.bind("my-event") { event -> println("Received event with data: $event") }
     }
