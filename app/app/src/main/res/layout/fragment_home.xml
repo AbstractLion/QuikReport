@@ -9,8 +9,9 @@
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="495dp"
-             android:layout_marginTop="24dp"
+             android:marginTop="24dp"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:src="@drawable/floor_1"/>
+    android:src="@drawable/floor_1"
+    />
 </RelativeLayout>
