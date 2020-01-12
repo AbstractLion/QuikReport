@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
+import android.os.Bundle
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,7 +23,20 @@ import com.pusher.client.channel.SubscriptionEventListener
 import com.pusher.client.connection.ConnectionEventListener
 import com.pusher.client.connection.ConnectionState
 import com.pusher.client.connection.ConnectionStateChange
-import kotlinx.android.synthetic.main.activity_main.*
+import com.mongodb.MongoClient
+import com.mongodb.MongoClientURI
+import com.mongodb.ServerAddress
+import com.mongodb.client.MongoDatabase
+import com.mongodb.client.MongoCollection
+import org.bson.Document
+import java.util.Arrays
+import com.mongodb.Block
+import com.mongodb.client.MongoCursor
+import com.mongodb.client.model.Filters.*
+import com.mongodb.client.result.DeleteResult
+import com.mongodb.client.model.Updates.*
+import com.mongodb.client.result.UpdateResult
+import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
