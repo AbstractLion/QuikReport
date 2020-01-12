@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         marker = findViewById(R.id.marker1)
+        marker?.setVisibility(View.GONE)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -77,8 +78,10 @@ class MainActivity : AppCompatActivity() {
             println("Marker is null."); return true
         }
         var layoutParams : FrameLayout.LayoutParams = marker?.layoutParams as FrameLayout.LayoutParams
+        marker?.setVisibility(View.VISIBLE);
+
         markerX = event.x.toInt() - 20
-        markerY = event.y.toInt() - 390
+        markerY = event.y.toInt() - 415
         layoutParams.leftMargin = markerX;
         layoutParams.topMargin = markerY;
         marker?.setLayoutParams(layoutParams);
