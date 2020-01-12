@@ -4,9 +4,7 @@ import com.abstractlion.quikreport.R
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,6 +19,7 @@ import com.pusher.client.channel.SubscriptionEventListener
 import com.pusher.client.connection.ConnectionEventListener
 import com.pusher.client.connection.ConnectionState
 import com.pusher.client.connection.ConnectionStateChange
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,6 +73,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
         channel.bind("my-event") { event -> println("Received event with data: $event") }
+        
+        reportButton.setOnClickListener {
+            Toast.makeText(this,"Test", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
