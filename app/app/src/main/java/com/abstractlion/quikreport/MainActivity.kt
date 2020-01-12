@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.GridLayout
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,11 +25,15 @@ import com.pusher.client.connection.ConnectionStateChange
 
 class MainActivity : AppCompatActivity() {
 
+    private var markerX: Int = 0
+    private var markerY: Int = 0
+    private var marker: ImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
+        marker = findViewById(R.id.marker1)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -53,42 +62,17 @@ class MainActivity : AppCompatActivity() {
         channel.bind("my-event") { event -> println("Received event with data: $event") }
     }
 
-    private var mVelocityTracker: VelocityTracker? = null
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        println("x: ${event.x}, Y: ${event.y}")
-        when (event.actionMasked) {
-
-
-            MotionEvent.ACTION_DOWN -> {
-                // Reset the velocity tracker back to its initial state.
-                mVelocityTracker?.clear()
-                // If necessary retrieve a new VelocityTracker object to watch the
-                // velocity of a motion.
-                mVelocityTracker = mVelocityTracker ?: VelocityTracker.obtain()
-                // Add a user's movement to the tracker.
-                mVelocityTracker?.addMovement(event)
-            }
-            MotionEvent.ACTION_MOVE -> {
-                mVelocityTracker?.apply {
-                    val pointerId: Int = event.getPointerId(event.actionIndex)
-                    addMovement(event)
-                    // When you want to determine the velocity, call
-                    // computeCurrentVelocity(). Then call getXVelocity()
-                    // and getYVelocity() to retrieve the velocity for each pointer ID.
-                    computeCurrentVelocity(1000)
-                    // Log velocity of pixels per second
-                    // Best practice to use VelocityTrackerCompat where possible.
-                    println("X: ${event.x}")
-                    println("Y: ${event.y}")
-                }
-            }
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                // Return a VelocityTracker object back to be re-used by others.
-                mVelocityTracker?.recycle()
-                mVelocityTracker = null
-            }
+        if (marker == null) {
+            println("Marker is null."); return true
         }
+        var layoutParams : FrameLayout.LayoutParams = marker?.layoutParams as FrameLayout.LayoutParams
+        markerX = event.x.toInt() - 20
+        markerY = event.y.toInt() - 390
+        layoutParams.leftMargin = markerX;
+        layoutParams.topMargin = markerY;
+        marker?.setLayoutParams(layoutParams);
+        marker?.bringToFront()
         return true
     }
 

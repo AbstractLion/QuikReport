@@ -15,12 +15,6 @@ View(context, attrs, defStyleAttr) {
 
     private val mCustomImage : Drawable? = context.getResources().getDrawable(R.drawable.floor_2)
 
-    private val testPaint = Paint().apply {
-        isAntiAlias = true
-        color = Color.RED
-        style = Paint.Style.STROKE
-    }
-
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
@@ -28,7 +22,6 @@ View(context, attrs, defStyleAttr) {
         mCustomImage!!.setBounds(imageBounds!!)
         mCustomImage.draw(canvas!!)
 
-        canvas.drawRect(Rect(0, 0, 10, 10), testPaint)
     }
 
     override fun onCapturedPointerEvent(motionEvent: MotionEvent): Boolean {
