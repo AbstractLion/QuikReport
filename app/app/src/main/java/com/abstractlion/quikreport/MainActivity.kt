@@ -1,10 +1,12 @@
 package com.abstractlion.quikreport
 
+import com.abstractlion.quikreport.R
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
 
         val options = PusherOptions()
         options.setCluster("us2")
@@ -81,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         marker?.setVisibility(View.VISIBLE);
 
         markerX = event.x.toInt() - 20
-        markerY = event.y.toInt() - 415
+        markerY = event.y.toInt() - 275
         layoutParams.leftMargin = markerX;
         layoutParams.topMargin = markerY;
         marker?.setLayoutParams(layoutParams);
