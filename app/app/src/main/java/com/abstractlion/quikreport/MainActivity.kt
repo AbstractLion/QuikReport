@@ -44,10 +44,6 @@ class MainActivity : AppCompatActivity() {
     private var markerX: Int = 0
     private var markerY: Int = 0
     private var marker: ImageView? = null
-    private val connectionString = MongoClientURI("mongodb://quikreport:quikreport123@ds121535.mlab.com:21535/heroku_z9cfrd75")
-    private val mongoClient : MongoClient = MongoClient(connectionString)
-    private val database = mongoClient.getDatabase("heroku_z9cfrd75")
-    private var collection : MongoCollection<Document> = database.getCollection("reports");
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,11 +91,15 @@ class MainActivity : AppCompatActivity() {
         channel.bind("my-event") { event -> println("Received event with data: $event") }
 
         reportButton.setOnClickListener {
+            val connectionString = MongoClientURI("mongodb://quikreport:quikreport123@ds121535.mlab.com:21535/heroku_z9cfrd75")
+            val mongoClient : MongoClient = MongoClient(connectionString)
+            val database = mongoClient.getDatabase("heroku_z9cfrd75")
+            var collection : MongoCollection<Document> = database.getCollection("reports");
             val doc : Document = Document("x", markerX)
                 .append("y", markerY)
                 .append("floor", 1)
                 .append("student_no", 869812);
-            collection.insertOne(doc);
+            // collection.insertOne(doc);
             val iii = Intent(this, ReportActivity::class.java)
             this.startActivity(iii)
         }
