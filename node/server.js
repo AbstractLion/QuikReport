@@ -11,7 +11,6 @@ const pusher = new Pusher({
   cluster    : 'us2',
   encrypted  : true,
 });
-
 const channel = 'tasks';
 
 const app = express();
@@ -33,31 +32,32 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Connection Error:'));
 
+var port = process.env.PORT || 8080;
 db.once('open', () => {
-  app.listen(9000, () => {
-    console.log('Node server running on port 9000');
+  app.listen(port, () => {
+    console.log('Node server running on port: ' + port);
   });
 
   const taskCollection = db.collection('tasks');
   const changeStream = taskCollection.watch();
-
+    
   changeStream.on('change', (change) => {
     console.log(change);
-
+      
     if(change.operationType === 'insert') {
       const task = change.fullDocument;
       pusher.trigger(
         channel,
-        'inserted',
+        'inserted', 
         {
           id: task._id,
           task: task.task,
         }
-      );
+      ); 
     } else if(change.operationType === 'delete') {
       pusher.trigger(
         channel,
-        'deleted',
+        'deleted', 
         change.documentKey._id
       );
     }

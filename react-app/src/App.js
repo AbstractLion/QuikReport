@@ -3,7 +3,7 @@ import './App.css';
 
 import Pusher from 'pusher-js';
 
-const API_URL = 'http://localhost:9000/api/';
+const API_URL = 'http://172.17.135.12:9000/api/';
 const PUSHER_APP_KEY = 'adf7ac7a5c51dcc45eb4';
 const PUSHER_APP_CLUSTER = 'us2';
 
@@ -20,7 +20,7 @@ class App extends Component {
     this.addTask = this.addTask.bind(this);
     this.removeTask = this.removeTask.bind(this);
   }
-
+    
   updateText(e) {
     this.setState({ task: e.target.value });
   }
@@ -41,7 +41,7 @@ class App extends Component {
       body: JSON.stringify(newTask)
     }).then(console.log);
   }
-
+    
   deleteTask(id) {
     fetch(API_URL + id, {
       method: 'delete'
@@ -54,7 +54,7 @@ class App extends Component {
       task: ''
     }));
   }
-
+    
   removeTask(id) {
     this.setState(prevState => ({
       tasks: prevState.tasks.filter(el => el.id !== id)
@@ -67,11 +67,11 @@ class App extends Component {
       encrypted: true,
     });
     this.channel = this.pusher.subscribe('tasks');
-
+	
     this.channel.bind('inserted', this.addTask);
     this.channel.bind('deleted', this.removeTask);
   }
-
+    
   render() {
     let tasks = this.state.tasks.map(item =>
       <Task key={item.id} task={item} onTaskClick={this.deleteTask} />
@@ -83,7 +83,7 @@ class App extends Component {
           <input type="text" className="input-todo" placeholder="New task" onChange={this.updateText} value={this.state.task} />
           <div className="btn btn-add" onClick={this.postTask}>+</div>
         </form>
-
+        
         <ul>
           {tasks}
         </ul>

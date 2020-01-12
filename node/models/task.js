@@ -1,11 +1,8 @@
-// imports mongoose
-const mongoose = require('mongoose');
-// schema is a JSON object
-// - defines shape and content of documents in collection
+const mongoose = require('mongoose');  
 const Schema   = mongoose.Schema;
 
-const taskSchema = new Schema({
-  task: { type: String },
+const taskSchema = new Schema({ 
+  task:        { type: String },
 });
 
-module.exports = mongoose.model('Task', taskSchema);
+module.exports = mongoose.model('Task', taskSchema); 
