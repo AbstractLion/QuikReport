@@ -1,12 +1,6 @@
 package com.abstractlion.quikreport
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
@@ -62,7 +56,10 @@ class MainActivity : AppCompatActivity() {
     private var mVelocityTracker: VelocityTracker? = null
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        println("x: ${event.x}, Y: ${event.y}")
         when (event.actionMasked) {
+
+
             MotionEvent.ACTION_DOWN -> {
                 // Reset the velocity tracker back to its initial state.
                 mVelocityTracker?.clear()
@@ -82,8 +79,8 @@ class MainActivity : AppCompatActivity() {
                     computeCurrentVelocity(1000)
                     // Log velocity of pixels per second
                     // Best practice to use VelocityTrackerCompat where possible.
-                    println("X velocity: ${getXVelocity(pointerId)}")
-                    println("Y velocity: ${getYVelocity(pointerId)}")
+                    println("X: ${event.x}")
+                    println("Y: ${event.y}")
                 }
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
