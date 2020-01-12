@@ -33,10 +33,9 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Connection Error:'));
 
-var port = process.env.PORT || 8080;
 db.once('open', () => {
-  app.listen(port, () => {
-    console.log('Node server running on port: ' + port);
+  app.listen(3000, '172.17.135.12', () => {
+    console.log('Node server running on port: ' + 3000);
   });
 
   const taskCollection = db.collection('tasks');
