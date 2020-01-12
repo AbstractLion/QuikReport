@@ -1,5 +1,6 @@
 package com.abstractlion.quikreport
 
+import android.content.Intent
 import com.abstractlion.quikreport.R
 import android.os.Bundle
 import android.view.MotionEvent
@@ -73,9 +74,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
         channel.bind("my-event") { event -> println("Received event with data: $event") }
-        
+
         reportButton.setOnClickListener {
-            Toast.makeText(this,"Test", Toast.LENGTH_LONG).show()
+            val iii = Intent(this, ReportActivity::class.java)
+            this.startActivity(iii)
         }
     }
 
