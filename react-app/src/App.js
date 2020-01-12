@@ -3,7 +3,7 @@ import './App.css';
 
 import Pusher from 'pusher-js';
 
-const API_URL = 'http://172.17.135.12:9000/api/';
+const API_URL = 'http://localhost:3000/api/';
 const PUSHER_APP_KEY = 'adf7ac7a5c51dcc45eb4';
 const PUSHER_APP_CLUSTER = 'us2';
 
