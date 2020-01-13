@@ -91,15 +91,17 @@ class MainActivity : AppCompatActivity() {
         channel.bind("my-event") { event -> println("Received event with data: $event") }
 
         reportButton.setOnClickListener {
-            val connectionString = MongoClientURI("mongodb://quikreport:quikreport123@ds121535.mlab.com:21535/heroku_z9cfrd75")
+        /*
+            val connectionString = MongoClientURI("")
             val mongoClient : MongoClient = MongoClient(connectionString)
-            val database = mongoClient.getDatabase("heroku_z9cfrd75")
+            val database = mongoClient.getDatabase("")
             var collection : MongoCollection<Document> = database.getCollection("reports");
             val doc : Document = Document("x", markerX)
                 .append("y", markerY)
                 .append("floor", 1)
                 .append("student_no", 869812);
             // collection.insertOne(doc);
+            */
             val iii = Intent(this, ReportActivity::class.java)
             this.startActivity(iii)
         }
